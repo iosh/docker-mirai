@@ -5,5 +5,5 @@ services:
   mirai:
     build: .
     volumes:
-      - ./config:/opt/mirai/config
+      - ./config:/opt/mirai/mcl/config
     restart: always
