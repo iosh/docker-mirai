@@ -1,7 +1,8 @@
-FROM eclipse-temurin:19-alpine
+FROM alpine:3
 
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 
-RUN  apk add --no-cache curl ca-certificates wget 
+RUN apk add --no-cache curl ca-certificates wget openjdk11
 
 
 WORKDIR /opt/mirai
@@ -12,8 +13,6 @@ RUN wget -q $(curl -s https://api.github.com/repos/iTXTech/mirai-console-loader/
 
 WORKDIR /opt/mirai/mcl
 
-RUN mkdir ./plugins &&\
-   wget -q $(curl -s https://api.github.com/repos/project-mirai/mirai-api-http/releases | grep browser_download_url | grep -m1 ".*.jar" | cut -d '"' -f 4) -P ./plugins
-
+RUN ./mcl --update-package net.mamoe:mirai-api-http --channel stable-v2 --type plugin
 
 CMD [ "java", "-jar", "mcl.jar" ]

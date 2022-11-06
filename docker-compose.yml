@@ -5,5 +5,11 @@ services:
   mirai:
     build: .
     volumes:
-      - ./config:/opt/mirai/mcl/config
+      - ./mirai/config:/opt/mirai/mcl/config
+      - ./mirai/bots:/opt/mirai/mcl/bots
+      - ./mirai/libs:/opt/mirai/mcl/libs
+      - ./mirai/plugin-libraries:/opt/mirai/mcl/plugin-libraries
+      - ./mirai/data:/opt/mirai/mcl/data
+      - ./mirai/modules:/opt/mirai/mcl/modules
+      - ./mirai/plugins:/opt/mirai/mcl/plugins
     restart: always
